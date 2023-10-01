@@ -11,6 +11,10 @@ public:
     int age;
     Person* spouse=nullptr;
     void marriage(Person* partner){
+        if(this->spouse!=nullptr||partner->spouse!=nullptr){ //make sure both are unmarried
+            cout<<this->firstname<<" and "<<partner->firstname<<" cannot be married."<<endl;
+            return;
+        }
         this->spouse=partner;
         partner->spouse=this;
         if(this->gender=="female"^partner->gender=="female"){ //^ is the xor operator
@@ -27,6 +31,10 @@ public:
 };
 
 void marriage(Person* a,Person* b){ //same function as above, but not a class member
+    if(a->spouse!=nullptr||b->spouse!=nullptr){
+        cout<<a->firstname<<" and "<<b->firstname<<" cannot be married."<<endl;
+        return;
+    }
     a->spouse=b;
     b->spouse=a;
     if(a->gender=="female"^b->gender=="female"){
