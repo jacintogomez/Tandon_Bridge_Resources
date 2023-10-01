@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 class Date{
@@ -8,12 +9,10 @@ public:
     int day;
     int month;
     int year;
+    vector<int> months={31,28,31,30,31,30,31,31,30,31,30,31};
     int gregorian(int m,int y){
-        if(m==4||m==6||m==9||m==11){return 30;}
-        else if(m==29){
-            if((y%4==0&&y%100!=0)||y%400==0){return 29;}
-            else{return 28;}
-        }else{return 31;}
+        if(m==2&&((y%4==0&&y%100!=0)||y%400==0)){return 29;}
+        else{return months[m];}
     }
     Date& operator++(){ //pre-increment
         if(day<gregorian(month,year)){++day;}//increment the real object
@@ -49,10 +48,20 @@ public:
             return -1;
         }
     }
-//    Date& operator+=(const int& val){
-//        int limit=gregorian(mont,yearh);
-//        int overflow=limit-day+val;
+    Date& operator+=(const int& inc){
+        int limit=gregorian(month,year);
+        int res=day+inc;
+        if(res<=limit){day=res;}
 
+    }
+    void operator>(const int inc){
+        int res=inc+month;
+        month=res%12;
+        year+=res/12;
+    }
+    void operator>>(const int inc){
+        year+=inc;
+    }
     friend ostream& operator<<(ostream& os,const Date d){
         os<<"("<<d.month<<"/"<<d.day<<"/"<<d.year<<")";
         return os;
@@ -67,5 +76,7 @@ int main(){
     Date wwiiend(9,1,1945);
     cout<<wwiiend++<<" is post-incremented to "<<wwiiend<<endl;
     cout<<"Jacinto's birth year is "<<jacinto[2]<<endl;
+    Date usa(7,4,1776);
+    usa++;
     return 0;
 }
