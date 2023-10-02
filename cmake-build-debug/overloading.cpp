@@ -5,6 +5,7 @@ using namespace std;
 class Date{
 public:
     Date():day(1),month(1),year(0){}
+    Date(const Date& d):day(d.day),month(d.month),year(d.year){}
     Date(int m,int d,int y){
         int limit;
         if(m>0&&m<=12){
@@ -35,7 +36,7 @@ public:
         }
         return *this; //simply increment and return original
     }
-    Date& operator++(int){ //post-increment
+    Date operator++(int){ //post-increment
         Date temp(*this);
         if(day<gregorian(month,year)){++day;}//increment the real object
         else{
@@ -107,18 +108,17 @@ public:
 };
 
 int main(){
-    Date jacinto(6,15,1998);
-    cout<<jacinto<<endl;
+    Date nyu(4,18,1831);
+    cout<<"date NYU was founded: "<<nyu<<endl;
     Date newmillennium(12,31,1999);
     cout<<newmillennium<<" is pre-incremented to "<<++newmillennium<<endl;
     Date wwiiend(9,1,1945);
     cout<<wwiiend++<<" is post-incremented to "<<wwiiend<<endl;
-    cout<<"Jacinto's birth year is "<<jacinto[2]<<endl;
-    Date usa(7,4,1776);
+    cout<<"WWII ended in "<<wwiiend[2]<<endl;
     Date input;
     cout<<"enter today's date: "<<endl;
     cin>>input;
     cout<<"today is "<<input<<endl;
-    cout<<"days since the Declaration of Independence signing: "<<input-usa;
+    cout<<"days since the NYU was founded: "<<input-nyu;
     return 0;
 }
