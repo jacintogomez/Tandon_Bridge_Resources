@@ -16,7 +16,8 @@ public:
             return;
         }
         this->spouse=partner;
-        partner->spouse=this;
+        partner->spouse=this; //"this" is a pointer to the current object
+        //not necessary but just putting last name changing in as a further example of data processing
         if(this->gender=="female"^partner->gender=="female"){ //^ is the xor operator
             (this->gender=="female")?this->lastname=partner->lastname:partner->lastname=this->lastname; //the ? and : are part of the ternary operator
         }
@@ -45,7 +46,7 @@ void marriage(Person* a,Person* b){ //same function as above, but not a class me
 int main(){
     cout<<"We start with our two people: "<<endl;
     Person jack("Jack","Johnson",30,"male");
-    Person mandy("Amanda","Williams",30,"female");
+    Person mandy("Amanda","Smith",30,"female");
     cout<<jack<<mandy;
     cout<<endl<<"After performing the marriage operation on them they become: "<<endl;
     jack.marriage(&mandy);

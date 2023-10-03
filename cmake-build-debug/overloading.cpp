@@ -34,7 +34,7 @@ public:
                 ++year;
             }
         }
-        return *this; //simply increment and return original
+        return *this; //return original
     }
     Date operator++(int){ //post-increment
         Date temp(*this);
@@ -60,6 +60,7 @@ public:
     bool operator==(const Date& o) const{
         return year==o.year&&month==o.month&&day==o.day;
     }
+    //subtract two dates, resulting the number of days between them
     int operator-(const Date& other) const{
         if(year<other.year||(year==other.year&&month<other.month||(month==other.month&&day<other.day))){
             cout<<"Invalid operation"<<endl;
@@ -73,6 +74,7 @@ public:
         }
         return count;
     }
+    //index a date, where [0] gives the month, [1] gives the day, and [2] gives the year of that date
     int operator[](int index) const{
         if(index==0){return month;}
         else if(index==1){return day;}
@@ -82,14 +84,17 @@ public:
             return -1;
         }
     }
-//    void operator>(const int inc){ //increment month
-//        int res=inc+month;
-//        month=res%12;
-//        year+=res/12;
-//    }
-//    void operator>>(const int inc){ //increment year
-//        year+=inc;
-//    }
+    //the overloaded variables don't have to be used for their original function,
+    //below is an example of overloading > to increment a month, and overloading >> to increment a year
+    void operator>(const int inc){ //increment month
+        int res=inc+month;
+        month=res%12;
+        year+=res/12;
+    }
+    void operator>>(const int inc){ //increment year
+        year+=inc;
+    }
+    //read in input
     friend istream& operator>>(istream& is,Date& d){
         cout<<"month: ";
         is>>d.month;
@@ -99,6 +104,7 @@ public:
         is>>d.year;
         return is;
     }
+    //format output
     friend ostream& operator<<(ostream& os,const Date& d){
         os<<"("<<d.month<<"/"<<d.day<<"/";
         if(d.year>0){os<<d.year<<")";}
@@ -110,7 +116,7 @@ public:
 int main(){
     Date nyu(4,18,1831);
     cout<<"date NYU was founded: "<<nyu<<endl;
-    Date newmillennium(12,31,1999);
+    Date newmillennium(12,31,-1999);
     cout<<newmillennium<<" is pre-incremented to "<<++newmillennium<<endl;
     Date wwiiend(9,1,1945);
     cout<<wwiiend++<<" is post-incremented to "<<wwiiend<<endl;
