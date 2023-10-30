@@ -9,13 +9,13 @@ using namespace std;
 template<class T>
 class node {
 public:
-    node<T> *prev;
-    node<T> *next;
-    T val;
     node(T val){  //constructor
         this->prev=this->next=nullptr;
         this->val=val;
     }
+    T val;
+    node<T> *prev;
+    node<T> *next;
 };
 
 template<class T>

@@ -116,7 +116,7 @@ public:
 int main(){
     Date nyu(4,18,1831);
     cout<<"date NYU was founded: "<<nyu<<endl;
-    Date newmillennium(12,31,-1999);
+    Date newmillennium(12,31,1999);
     cout<<newmillennium<<" is pre-incremented to "<<++newmillennium<<endl;
     Date wwiiend(9,1,1945);
     cout<<wwiiend++<<" is post-incremented to "<<wwiiend<<endl;
