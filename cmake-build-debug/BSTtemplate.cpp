@@ -48,14 +48,33 @@ public:
         if(leaf->val<parent->val){parent->left=leaf;}
         else{parent->right=leaf;}
     }
+    node<T> *findparent(node<T> *start,node<T> *find){
+        if(start==find||start==nullptr){return nullptr;}
+        if(start->left==find||start->right==find){return start;}
+        if(start->val<find->val){return findparent(start->right,find);}
+        else{return findparent(start->left,find);}
+    }
     void remove(node<T>* del){
+        node<T> *parent=findparent(this->root,del);
+        bool rorl;
+        if(del==nullptr){return;}
+//        if(parent==nullptr){ //deleting the root node
+//            delete del;
+//            del=nullptr;
+//        }
+        (parent->right==del)?rorl=true:rorl=false;
         if(del->left==nullptr&&del->right==nullptr){ //leaf, can just delete it
+            if(parent->val<del->val){parent->right=nullptr;}
+            else{parent->left=nullptr;}
             delete del;
-            del=nullptr;
         }
-        if(del->left==nullptr||del->right==nullptr){ //1 child, swap with child and delete
+        else if(del->left==nullptr||del->right==nullptr){ //1 child, replace with child
+            if(del->left==nullptr){
+                (rorl)?parent->right=del->right:parent->left=del->right;
+            }else{
+                (rorl)?parent->right=del->left:parent->left=del->right;
+            }
             delete del;
-            del=nullptr;
         }
     }
     void inorder(node<T>* rt){ //in-order traversal (most common)
@@ -95,23 +114,31 @@ public:
 };
 
 int main(){
-    vector<int> nums={4,2,6,1,3,5,7};
-//    adding these numbers ^ to the tree in that order
+    node<int>* four=new node<int>(4);
+    node<int>* two=new node<int>(2);
+    node<int>* six=new node<int>(6);
+    node<int>* one=new node<int>(1);
+    node<int>* three=new node<int>(3);
+    node<int>* five=new node<int>(5);
+    node<int>* seven=new node<int>(7);
+    vector<node<int>*> nums={four,two,six,one,three,five,seven};
+//    adding these numbers ^ to the tree in order 4,2,6,1,3,5,7
 //    looks like:
 //       4
 //     /   \
 //     2   6
 //    / \ / \
-//    1 3 5 7
+//    1 3 5 7  = 1,2,3,4,5,6,7
     BST<int>* tree=new BST<int>();
-    for(int x:nums){
-        tree->add(new node<int>(x));
-    }
+    for(node<int>* x:nums){tree->add(x);} //adding nodes has to be done in a certain order since this is not a self balancing tree
     cout<<"DFS - depth first search"<<endl;
     cout<<"In Order: ";tree->printinorder();
     cout<<"Pre-Order: ";tree->printpreorder();
     cout<<"Post-Order: ";tree->printpostorder();
     cout<<endl<<"BFS - breadth first search"<<endl;
     cout<<"Level Order: ";tree->printlevelorder();
+    cout<<endl<<"Delete Leaf Node #7: ";tree->remove(seven);tree->printinorder();
+    cout<<endl<<"Delete Node #6: ";tree->remove(six);tree->printinorder();
+    //cout<<endl<<"Delete Leaf Node of with #3: ";tree->remove(three);tree->printinorder();
     return 0;
 }
