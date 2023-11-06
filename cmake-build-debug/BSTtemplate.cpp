@@ -70,30 +70,33 @@ public:
     }
     void remove(node<T>* del){
         node<T> *parent=findparent(this->root,del);
-        bool rorl;
+        bool rorl; //is the node to be deleted the right or left child of its parent?
         if(del==nullptr){return;}
-//        if(parent==nullptr){ //deleting the root node
-//            delete del;
-//            del=nullptr;
-//        }
-        (parent->right==del)?rorl=true:rorl=false;
+        if(del!=root){(parent->right==del)?rorl=true:rorl=false;}
         if(del->left==nullptr&&del->right==nullptr){ //leaf, can just delete it
-            if(parent->val<del->val){parent->right=nullptr;}
-            else{parent->left=nullptr;}
-            delete del;
-        }
-        else if(del->left==nullptr||del->right==nullptr){ //1 child, replace with child
-            if(del->left==nullptr){
-                (rorl)?parent->right=del->right:parent->left=del->right;
-            }else{
-                (rorl)?parent->right=del->left:parent->left=del->right;
+            if(del!=root){
+                if(parent->val<del->val){parent->right=nullptr;}
+                else{parent->left=nullptr;}
             }
             delete del;
+            size--;
+        }
+        else if(del->left==nullptr||del->right==nullptr){ //1 child, replace with child
+            if(del!=root){
+                if(del->left==nullptr){
+                    (rorl)?parent->right=del->right:parent->left=del->right;
+                }else{
+                    (rorl)?parent->right=del->left:parent->left=del->right;
+                }
+            }
+            delete del;
+            size--;
         }
         else{ //2 children, replace with in order successor (could also do predecessor)
             node<T> *suc=findsuccessor(del);
-            del->val=suc->val;
+            int temp=suc->val;
             remove(suc);
+            del->val=temp;
         }
 //        else { // 2 children, replace with in order successor (or predecessor)
 //            node<T> *suc = findsuccessor(del);
@@ -107,7 +110,6 @@ public:
 //            }
 //            delete suc;
 //        }
-
     }
     void inorder(node<T>* rt){ //in-order traversal (most common)
         if(rt==nullptr){return;}
@@ -163,14 +165,33 @@ int main(){
 //    1 3 5 7  = 1,2,3,4,5,6,7
     BST<int>* tree=new BST<int>();
     for(node<int>* x:nums){tree->add(x);} //adding nodes has to be done in a certain order since this is not a self balancing tree
-//    cout<<"DFS - depth first search"<<endl;
-//    cout<<"In Order: ";tree->printinorder();
-//    cout<<"Pre-Order: ";tree->printpreorder();
-//    cout<<"Post-Order: ";tree->printpostorder();
-//    cout<<endl<<"BFS - breadth first search"<<endl;
-//    cout<<"Level Order: ";tree->printlevelorder();
-//    cout<<endl<<"Delete Leaf Node #7: ";tree->remove(seven);tree->printinorder();
-//    cout<<"Delete Node #6: ";tree->remove(six);tree->printinorder();
-    cout<<"Delete Leaf Node of with #2: ";tree->remove(two);tree->printinorder();
+    cout<<"DFS - depth first search"<<endl;
+    cout<<"In Order: ";tree->printinorder();
+    cout<<"Pre-Order: ";tree->printpreorder();
+    cout<<"Post-Order: ";tree->printpostorder();
+    cout<<endl<<"BFS - breadth first search"<<endl;
+    cout<<"Level Order: ";tree->printlevelorder();
+    //cout<<endl<<"Delete root node #4: ";tree->remove(four);tree->printinorder();
+    cout<<endl<<"Delete leaf node #7: ";tree->remove(seven);tree->printinorder();
+//    now it looks like:
+//       4
+//     /   \
+//     2   6
+//    / \ /
+//    1 3 5    = 1,2,3,4,5,6
+    cout<<"Delete 1-child node #6: ";tree->remove(six);tree->printinorder();
+//    now it looks like:
+//       4
+//     /   \
+//     2   5
+//    / \
+//    1 3      = 1,2,3,4,5
+    cout<<"Delete 2-child node #2: ";tree->remove(two);tree->printinorder();
+//    now it looks like:
+//       4
+//     /   \
+//     3   5
+//    /
+//    1        = 1,3,4,5
     return 0;
 }
