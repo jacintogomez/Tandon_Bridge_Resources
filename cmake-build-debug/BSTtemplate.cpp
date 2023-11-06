@@ -54,6 +54,20 @@ public:
         if(start->val<find->val){return findparent(start->right,find);}
         else{return findparent(start->left,find);}
     }
+    node<T> *findsuccessor(node<T> *st){
+        st=st->right;
+        while(st->left!=nullptr){
+            st=st->left;
+        }
+        return st;
+    }
+    node<T> *findpredecessor(node<T> *st){
+        st=st->left;
+        while(st->right!=nullptr){
+            st=st->right;
+        }
+        return st;
+    }
     void remove(node<T>* del){
         node<T> *parent=findparent(this->root,del);
         bool rorl;
@@ -76,6 +90,24 @@ public:
             }
             delete del;
         }
+        else{ //2 children, replace with in order successor (could also do predecessor)
+            node<T> *suc=findsuccessor(del);
+            del->val=suc->val;
+            remove(suc);
+        }
+//        else { // 2 children, replace with in order successor (or predecessor)
+//            node<T> *suc = findsuccessor(del);
+//            del->val = suc->val;
+//            // Update the parent of suc to point to its child
+//            node<T> *suc_parent = findparent(this->root, suc);
+//            if (suc_parent->left == suc) {
+//                suc_parent->left = nullptr;
+//            } else {
+//                suc_parent->right = nullptr;
+//            }
+//            delete suc;
+//        }
+
     }
     void inorder(node<T>* rt){ //in-order traversal (most common)
         if(rt==nullptr){return;}
@@ -131,14 +163,14 @@ int main(){
 //    1 3 5 7  = 1,2,3,4,5,6,7
     BST<int>* tree=new BST<int>();
     for(node<int>* x:nums){tree->add(x);} //adding nodes has to be done in a certain order since this is not a self balancing tree
-    cout<<"DFS - depth first search"<<endl;
-    cout<<"In Order: ";tree->printinorder();
-    cout<<"Pre-Order: ";tree->printpreorder();
-    cout<<"Post-Order: ";tree->printpostorder();
-    cout<<endl<<"BFS - breadth first search"<<endl;
-    cout<<"Level Order: ";tree->printlevelorder();
-    cout<<endl<<"Delete Leaf Node #7: ";tree->remove(seven);tree->printinorder();
-    cout<<endl<<"Delete Node #6: ";tree->remove(six);tree->printinorder();
-    //cout<<endl<<"Delete Leaf Node of with #3: ";tree->remove(three);tree->printinorder();
+//    cout<<"DFS - depth first search"<<endl;
+//    cout<<"In Order: ";tree->printinorder();
+//    cout<<"Pre-Order: ";tree->printpreorder();
+//    cout<<"Post-Order: ";tree->printpostorder();
+//    cout<<endl<<"BFS - breadth first search"<<endl;
+//    cout<<"Level Order: ";tree->printlevelorder();
+//    cout<<endl<<"Delete Leaf Node #7: ";tree->remove(seven);tree->printinorder();
+//    cout<<"Delete Node #6: ";tree->remove(six);tree->printinorder();
+    cout<<"Delete Leaf Node of with #2: ";tree->remove(two);tree->printinorder();
     return 0;
 }
