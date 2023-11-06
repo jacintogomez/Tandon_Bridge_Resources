@@ -98,18 +98,6 @@ public:
             remove(suc);
             del->val=temp;
         }
-//        else { // 2 children, replace with in order successor (or predecessor)
-//            node<T> *suc = findsuccessor(del);
-//            del->val = suc->val;
-//            // Update the parent of suc to point to its child
-//            node<T> *suc_parent = findparent(this->root, suc);
-//            if (suc_parent->left == suc) {
-//                suc_parent->left = nullptr;
-//            } else {
-//                suc_parent->right = nullptr;
-//            }
-//            delete suc;
-//        }
     }
     void inorder(node<T>* rt){ //in-order traversal (most common)
         if(rt==nullptr){return;}
@@ -141,10 +129,10 @@ public:
         }
     }
     //traversal driver functions
-    void printinorder(){inorder(this->root);cout<<endl;}
-    void printpreorder(){preorder(this->root);cout<<endl;}
-    void printpostorder(){postorder(this->root);cout<<endl;}
-    void printlevelorder(){levelorder(this->root);cout<<endl;}
+    void inorder(){inorder(this->root);cout<<endl;}
+    void preorder(){preorder(this->root);cout<<endl;}
+    void postorder(){postorder(this->root);cout<<endl;}
+    void levelorder(){levelorder(this->root);cout<<endl;}
 };
 
 int main(){
@@ -166,27 +154,27 @@ int main(){
     BST<int>* tree=new BST<int>();
     for(node<int>* x:nums){tree->add(x);} //adding nodes has to be done in a certain order since this is not a self balancing tree
     cout<<"DFS - depth first search"<<endl;
-    cout<<"In Order: ";tree->printinorder();
-    cout<<"Pre-Order: ";tree->printpreorder();
-    cout<<"Post-Order: ";tree->printpostorder();
+    cout<<"In Order: ";tree->inorder();
+    cout<<"Pre-Order: ";tree->preorder();
+    cout<<"Post-Order: ";tree->postorder();
     cout<<endl<<"BFS - breadth first search"<<endl;
-    cout<<"Level Order: ";tree->printlevelorder();
-    //cout<<endl<<"Delete root node #4: ";tree->remove(four);tree->printinorder();
-    cout<<endl<<"Delete leaf node #7: ";tree->remove(seven);tree->printinorder();
+    cout<<"Level Order: ";tree->levelorder();
+    //cout<<endl<<"Delete root node #4: ";tree->remove(four);tree->inorder();
+    cout<<endl<<"Delete leaf node #7: ";tree->remove(seven);tree->inorder();
 //    now it looks like:
 //       4
 //     /   \
 //     2   6
 //    / \ /
 //    1 3 5    = 1,2,3,4,5,6
-    cout<<"Delete 1-child node #6: ";tree->remove(six);tree->printinorder();
+    cout<<"Delete 1-child node #6: ";tree->remove(six);tree->inorder();
 //    now it looks like:
 //       4
 //     /   \
 //     2   5
 //    / \
 //    1 3      = 1,2,3,4,5
-    cout<<"Delete 2-child node #2: ";tree->remove(two);tree->printinorder();
+    cout<<"Delete 2-child node #2: ";tree->remove(two);tree->inorder();
 //    now it looks like:
 //       4
 //     /   \
