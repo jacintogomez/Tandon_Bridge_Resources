@@ -57,6 +57,7 @@ public:
             delete del;
             del=nullptr;
         }
+    }
     void inorder(node<T>* rt){ //in-order traversal (most common)
         if(rt==nullptr){return;}
         inorder(rt->left);
