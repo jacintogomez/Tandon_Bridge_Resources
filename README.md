@@ -1,4 +1,4 @@
-# Tandon_Bridge_Resources
+# Tandon Bridge Resources
 
 *All files are single C++ files that can be copied into a C++ compiler*
 
