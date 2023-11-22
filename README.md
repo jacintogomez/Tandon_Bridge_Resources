@@ -6,4 +6,4 @@
 `LLTemplate.cpp`: Template file for a Linked List with add/remove and print functions\
 `marriage.cpp `: Demonstration of objects with pointers to each other\
 `overloading.cpp`: Demonstration of operator overloading *==, +=, -, <<, >>, [], ++(pre/post)*\
-`LLandBSTtraversal.cpp`: Comparison between contents of a BST and LL (with recursive example)\
+`LLandBSTtraversal.cpp`: Comparison between contents of a BST and LL (with recursive example)
