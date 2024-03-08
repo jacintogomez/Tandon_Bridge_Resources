@@ -6,6 +6,7 @@
 #include <vector>
 using namespace std;
 
+//Define v2d and v1d so that we don't have to keep writing that long vector declaration step for each function
 typedef vector<vector<int>> v2d;
 typedef vector<int> v1d;
 

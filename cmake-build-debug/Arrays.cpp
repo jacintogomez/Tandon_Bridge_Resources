@@ -45,6 +45,6 @@ int main() {
     print(ar);
     array<int,5> ra={3,4,5,4,3};
     eve3(ra);
-    for(int i:ar){cout<<i<<" ";}
+    for(int i:ra){cout<<i<<" ";}
     return 0;
 }
