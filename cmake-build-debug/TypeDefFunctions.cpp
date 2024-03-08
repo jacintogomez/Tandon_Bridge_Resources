@@ -5,9 +5,9 @@
 #include <iostream>
 using namespace std;
 
-//We need to define a new type
+//We need to declare a new type
 typedef int (*ptrfunc)(int);
-typedef void (*msgfunc)();
+typedef void (*msgfunc)(int,int);
 
 int addone(int x){
     return x+1;
@@ -18,9 +18,25 @@ ptrfunc dotask(){
     return addone; //The function returned here is addone
 }
 
-void m1(){cout<<"Hello ";}
-void m2(){cout<<"how ";}
-void m3(){cout<<"are you?";}
+void add(int x,int y){
+    cout<<x<<" + "<<y<<" = "<<x+y<<endl;
+}
+
+void subtract(int x,int y){
+    cout<<x<<" - "<<y<<" = "<<x-y<<endl;
+}
+
+void multiply(int x,int y){
+    cout<<x<<" * "<<y<<" = "<<x*y<<endl;
+}
+
+void divide(int x,int y){
+    cout<<x<<"  "<<y<<" = "<<x/y<<endl;
+}
+
+void modulo(int x,int y){
+    cout<<x<<" mod "<<y<<" = "<<x%y<<endl;
+}
 
 int main(){
     //Define a new pointer function ptrf, which is defined as the dotask() function
@@ -29,9 +45,12 @@ int main(){
     //^Very simple example
 
     //More useful application: creating a list of functions to call all of them
-    msgfunc functionarray[]={m1,m2,m3};
+    cout<<"Enter 2 numbers: ";
+    int x,y;
+    cin>>x>>y;
+    msgfunc functionarray[]={add,subtract,multiply,divide,modulo};
     for(msgfunc printthis:functionarray){
-        printthis();
+        printthis(x,y);
     }
     return 0;
 }
