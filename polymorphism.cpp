@@ -32,7 +32,12 @@ public:
 int main(){
     Otter kira("Sea otter","Kira");
     Dog max("Husky","Max");
+    // Animal animal(4,"nobody"); Cannot instantiate an abstract class
     max.makesound();
     kira.makesound();
+
+    Animal *ptr; // But you can make a reference to an abstract class, and give it the address of an object
+    ptr=&kira;
+    ptr->makesound();
     return 0;
 }
