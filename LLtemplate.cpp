@@ -73,12 +73,12 @@ public:
     void deallocate(){
         node<T> *start=this->head,*temp;
         while(start!=nullptr){
-            cout<<"titties";
             if(temp!=tail){temp=start->next;}
-            cout<<start->val;
             delete start; //delete memory
-            start=nullptr; //prevent dangling pointer
+            start=temp; //prevent dangling pointer
         }
+        this->head=this->tail=nullptr;
+        this->size=0;
     }
 };
 
@@ -116,8 +116,10 @@ int main(){
 
     cout<<endl<<"remove the first element"<<endl;
     dl->removebeginning();
+
     dl->print();
-    dl->deallocate();
-    delete dl;
+
+    dl->deallocate(); //deallocate dynamic memory of nodes
+    delete dl; //deallocate dynamic memory of list
     return 0;
 }
