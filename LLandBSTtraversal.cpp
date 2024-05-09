@@ -111,13 +111,11 @@ void inorder(BSTNode* rt,vector<int>& v){
 
 bool compare(BSTNode* root,LListNode*& head){
     if(head==nullptr){return root==nullptr;}
-    bool left=true,right=true,center=true;
+    bool left=true,right=true,center;
     if(root!=nullptr){if(root->left!=nullptr){left=compare(root->left,head);}}else{return false;}
     if(head!=nullptr){
-        if(root!=nullptr){
-            center=root->val==head->val;
-            head=head->next;
-        }else{return false;}
+        center=root->val==head->val;
+        head=head->next;
     }
     else{center=false;}
     if(root->right!=nullptr){right=compare(root->right,head);}//}else{right=false;}

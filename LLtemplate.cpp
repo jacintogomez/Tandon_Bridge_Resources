@@ -24,6 +24,10 @@ public:
     node<T>* head;
     node<T>* tail;
     int size;
+    list(){ //no-arg constructor
+        this->head=this->tail=nullptr;
+        size=0;
+    }
     list(node<T>* input){ //constructor
         this->head=input;
         this->tail=input;
@@ -66,31 +70,41 @@ public:
         }
         cout<<endl;
     }
+    void deallocate(){
+        node<T> *start=this->head,*temp;
+        while(start!=nullptr){
+            cout<<"titties";
+            if(temp!=tail){temp=start->next;}
+            cout<<start->val;
+            delete start; //delete memory
+            start=nullptr; //prevent dangling pointer
+        }
+    }
 };
 
 int main(){
     cout<<"Linked list initialized with one element"<<endl;
-    node<string>* start=new node<string>("Tandon");
-    list<string>* dl=new list<string>(start);
+    auto* start=new node<string>("Tandon");
+    auto* dl=new list<string>(start);
 //    dl->print();
 //    dl->removebeginning();
 //    dl->print();
 //    dl->removeend();
 //    dl->print();
     cout<<endl<<"add another element to the end"<<endl;
-    node<string>* one=new node<string>("Stern");
+    auto* one=new node<string>("Stern");
     dl->addend(one);
     dl->print();
 
     cout<<endl<<"add another element to the beginning"<<endl;
-    node<string>* two=new node<string>("Silver");
+    auto* two=new node<string>("Silver");
     dl->addbeginning(two);
     dl->print();
 
     cout<<endl<<"add 3 more to the end"<<endl;
-    node<string>* three=new node<string>("Courant");
-    node<string>* four=new node<string>("Wagner");
-    node<string>* five=new node<string>("Tisch");
+    auto* three=new node<string>("Courant");
+    auto* four=new node<string>("Wagner");
+    auto* five=new node<string>("Tisch");
     dl->addend(three);
     dl->addend(four);
     dl->addend(five);
@@ -103,5 +117,7 @@ int main(){
     cout<<endl<<"remove the first element"<<endl;
     dl->removebeginning();
     dl->print();
+    dl->deallocate();
+    delete dl;
     return 0;
 }
