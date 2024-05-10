@@ -60,9 +60,9 @@ public:
 
 int main(){
     list* l=new list();
-    l->addend(new person("Dalton",24));
-    l->addend(new person("John",32));
-    l->addbeginning(new person("Jack",25));
+    l->addend(new person("Dalton",22));
+    l->addend(new person("John",33));
+    l->addbeginning(new person("Jack",24));
     l->print();
     l->deallocate();
     delete l;

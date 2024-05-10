@@ -24,20 +24,22 @@ public:
 
 class Otter:public Animal{
 public:
-    Otter(string t,string n):Animal(4,n),type(t){}
-    string type;
-    void makesound(){cout<<"Tap"<<endl;}
+    Otter(bool t,string n):Animal(4,n),issea(t){}
+    bool issea; //true for sea otter, false for river otter
+    void makesound(){cout<<"Squeak"<<endl;}
 };
 
 int main(){
-    Otter kira("Sea otter","Kira");
+    Otter kira(true,"Kira");
     Dog max("Husky","Max");
     // Animal animal(4,"nobody"); Cannot instantiate an abstract class
+    cout<<"Sounds made by Dog and Otter"<<endl;
     max.makesound();
     kira.makesound();
 
+    cout<<"Dynamic binding on a generic Animal pointer (must be a pointer, cannot make a real Animal object)"<<endl;
     Animal *ptr; // But you can make a reference to an abstract class, and give it the address of an object
     ptr=&kira;
-    ptr->makesound();
+    ptr->makesound(); // This is dynamic binding, where the function behaves differently depending on what type of object it is called on
     return 0;
 }
