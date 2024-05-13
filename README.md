@@ -8,13 +8,15 @@
 
 `SmartPointers.cpp`: Unique, shared, and weak smart pointer examples.
 
-`marriage.cpp `: Demonstration of objects with pointers to each other
+`marriage.cpp `: Demonstration of objects with pointers to each other.
 
 `overloading.cpp`: Demonstration of operator overloading *==, +=, -, <<, >>, [], ++(pre/post).*
 
 `LLandBSTtraversal.cpp`: Comparison between contents of a BST and LL with a recursive function that goes through both simultaneously.
 
 `polymorphism.cpp`: Dynamic binding of function in an Animal class and child classes.
+
+`encapsulation.cpp`: Example of a bank account with credit card and debit card classes accessing its protected members.
 
 `TypeDef.cpp`: Using typedef in replacement of long declarations (instead of vector<vector<vector<int>>>).
 
