@@ -6,6 +6,7 @@
  * The answer to this will depend on:
  *  n - the # of people skipped
  *  x - the # of people who started
+ *  s - # of starting point
  * We can answer this easily with a circular implementation of a linked list
  * Behavior: Starting at 1, count off n people then eliminate person n
  * Example: n=5, x=1, start at #1, skip 1 person (#2) and eliminate #3. Then start at #3, skip 1 person (#4) and eliminate #5
@@ -100,7 +101,7 @@ int main(){
     cin>>target;
     cout<<"How many people will be skipped each turn? ";
     cin>>separation;
-    cout<<"Which person will the counting start on? (default is 1)";
+    cout<<"Which person will the counting start on? (default is 1) ";
     cin>>start;
     if(start>target||start<=0){
         cout<<"Non-existent starting person. Will start at #1 instead"<<endl;
