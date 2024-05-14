@@ -39,16 +39,17 @@ public:
             n->next=head;
             head=n;
         }
+        size++;
     }
     void add(list* one,list* two){
         node* t1=one->tail;
         node* t2=two->tail;
-        int sum,tens=0;
+        int sum,tens=0,remainder;
         while(t1!=nullptr&&t2!=nullptr){
             sum=t1->dig+t2->dig+tens;
             tens=sum/10;
-            cout<<" adding "<<sum%10<<endl;
-            node* temp=new node(sum%10);
+            remainder=sum%10;
+            node* temp=new node(remainder);
             this->prepend(temp);
             t1=t1->prev;
             t2=t2->prev;
@@ -82,14 +83,14 @@ public:
         }
     }
     void writeout(ofstream& f){
-        node* temp=tail;
+        node* temp=head;
         while(temp!=nullptr){
             f<<temp->dig;
-            temp=temp->prev;
+            temp=temp->next;
         }
         f<<endl;
     }
-    void openfile(ifstream& infile){
+    void openinputfile(ifstream& infile){
         infile.open(name);
         while(!infile){
             cout<<"Failed to open'\n'Make sure you are entering the proper name";
@@ -98,8 +99,20 @@ public:
             infile.open(name);
         }
     }
-    void closefile(ifstream& infile){
+    void closeinputfile(ifstream& infile){
         infile.close();
+    }
+    void openoutputfile(ofstream& outfile){
+        outfile.open(name);
+        while(!outfile){
+            cout<<"Failed to open'\n'Make sure you are entering the proper name";
+            cin>>name;
+            outfile.clear();
+            outfile.open(name);
+        }
+    }
+    void closeoutputfile(ofstream& outfile){
+        outfile.close();
     }
     void display(){
         cout<<name<<": ";
@@ -122,25 +135,25 @@ public:
 };
 
 int main(){
-    ifstream if1,if2,if3;
+    ifstream if1,if2;
     ofstream of3;
-    list* l1=new list("test1.txt");
-    l1->openfile(if1);
+    list* l1=new list("num1.txt");
+    l1->openinputfile(if1);
     l1->readin(if1);
     l1->display();
-    l1->closefile(if1);
+    l1->closeinputfile(if1);
 
-    list* l2=new list("test2.txt");
-    l2->openfile(if2);
+    list* l2=new list("num2.txt");
+    l2->openinputfile(if2);
     l2->readin(if2);
     l2->display();
-    l2->closefile(if2);
+    l2->closeinputfile(if2);
 
     list* l3=new list("num3.txt");
     l3->add(l1,l2);
-    l3->display_backwards();
-    l3->openfile(if3);
+    l3->display();
+    l3->openoutputfile(of3);
     l3->writeout(of3);
-    l3->closefile(if3);
+    l3->closeoutputfile(of3);
     return 0;
 }
