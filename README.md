@@ -16,7 +16,13 @@
 
 `polymorphism.cpp`: Dynamic binding of function in an Animal class and child classes.
 
+`BaseDerived.cpp`: Shows another type of polymorphism called slicing where a derived class loses its functions when declared as a base object.
+
+`BaseDerivedPointers.cpp`: Shows how slicing does NOT happen when we replicate the situation above with pointers to objects instead of just objects.
+
 `encapsulation.cpp`: Example of a bank account with credit card and debit card classes accessing its protected members.
+
+`HugeInt.cpp`: Shows file reading and writing by taking in a huge int (much larger than C++ can handle) and storing it in a Linked List for addition with another.
 
 `TypeDef.cpp`: Using typedef in replacement of long declarations (instead of vector<vector<vector<int>>>).
 
