@@ -98,6 +98,7 @@ void inorder(BSTNode* rt,vector<int>& v){
     inorder(rt->right,v);
 }
 
+// Simple comparison: add both to vectors and compare the vectors
 // bool compare(BSTNode* b, LListNode* l){
 //     vector<int> d;
 //     vector<int> e;
@@ -109,16 +110,17 @@ void inorder(BSTNode* rt,vector<int>& v){
 //     return d==e;
 // }
 
-bool compare(BSTNode* root,LListNode*& head){
-    if(head==nullptr){return root==nullptr;}
-    bool left=true,right=true,center;
+// Complex comparison: iterate through both recursively simultaneously
+bool compare(BSTNode* root,LListNode*& head){ // LL must be passed by reference so its value is updated across all recursive instances in the call stack
+    if(head==nullptr){return root==nullptr;} // Null head means end of LL, but not necessarily end of BST
+    bool left=true,right=true,center; // Left: do all left nodes match what we've seen so far in the LL? Center: do the 2 current nodes match
     if(root!=nullptr){if(root->left!=nullptr){left=compare(root->left,head);}}else{return false;}
     if(head!=nullptr){
-        center=root->val==head->val;
+        center=root->val==head->val; // Set center as true or false
         head=head->next;
     }
     else{center=false;}
-    if(root->right!=nullptr){right=compare(root->right,head);}//}else{right=false;}
+    if(root->right!=nullptr){right=compare(root->right,head);}
     return left&&right&&center;
 }
 
