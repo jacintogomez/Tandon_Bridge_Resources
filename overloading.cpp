@@ -125,6 +125,6 @@ int main(){
     cout<<"enter today's date: "<<endl;
     cin>>input;
     cout<<"today is "<<input<<endl;
-    cout<<"days since the NYU was founded: "<<input-nyu;
+    cout<<"days since the new millennium: "<<input-newmillennium;
     return 0;
 }
